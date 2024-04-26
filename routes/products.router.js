@@ -16,15 +16,13 @@ router.get('/filter', ( req,res ) => {//especifico
 // se debe poner primero todo lo que sea especifico antes de lo que sea dinámico
 
 //Find Item
-router.get('/:id', async ( req, res ) => {//dinámico
+router.get('/:id', async ( req, res, next ) => {//dinámico
   try {
     const { id } = req.params;
     const product = await service.findOne(id);
     res.status(302).json(product);
   } catch (error) {
-    res.status(404).json({
-      message: error.message
-    });
+    next(error);
   }
 });
 
@@ -39,30 +37,32 @@ router.post('/', async ( req,res ) => {
 });
 
 //Update Item
-router.patch('/:id', async ( req,res ) => {
-try {
-  const { id } = req.params;
-  const body = req.body;
-  const itemUpdate = await service.update( id, body );
-    res.json({
-      message: 'Item Updated',
-      data: itemUpdate
-    });
-} catch (error) {
-  res.status(404).json({
-    message: error.message
-  });
-}
+router.patch('/:id', async ( req,res,next ) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const itemUpdate = await service.update( id, body );
+      res.json({
+        message: 'Item Updated',
+        data: itemUpdate
+      });
+  } catch (error) {
+    next(error);
+  }
 });
 
 //Delete Item
-router.delete('/:id', async ( req,res ) => {
-  const { id } = req.params;
-  const itemDelete = await service.delete( id );
-  res.json({
-    message: 'deleted',
-    itemDelete
-  });
+router.delete('/:id', async ( req,res,next ) => {
+  try {
+    const { id } = req.params;
+    const itemDelete = await service.delete( id );
+    res.json({
+      message: 'deleted',
+      itemDelete
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 

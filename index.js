@@ -1,6 +1,6 @@
 import express from 'express';
 import routerApi from './routes/index.js';
-import { errorsLog, errorHandler } from './middlewares/error.handler.js'
+import { errorsLog,errorHandler,boomErrorHandler } from './middlewares/error.handler.js'
 //npm run dev
 
 const app = express();
@@ -26,4 +26,5 @@ app.listen(port, () => {
 routerApi(app);
 
 app.use(errorsLog);
+app.use(boomErrorHandler);
 app.use(errorHandler);

@@ -56,7 +56,28 @@ Ahora instalamos dependencias de desarrollo
 
 # ✨ Instalación de Express.js y tu primer servidor HTTP
 
+Express.js es el marco backend más popular para Node.js y es una parte importante del ecosistema JavaScript .
+
+Está diseñado para crear aplicaciones web híbridas, de una sola página y de varias páginas; también se ha convertido en el estándar para desarrollar aplicaciones backend con Node.js y es la parte backend de algo conocido como pila MEVN.
+
+MEVN es una pila de software JavaScript gratuita y de código abierto para crear sitios web y aplicaciones web dinámicos que tiene los siguientes componentes:
+
+- MongoDB: MongoDB es la base de datos NoSQL estándar
+- Express.js: el marco de aplicaciones web predeterminado para crear aplicaciones web
+- Vue.js: el marco progresivo de JavaScript utilizado para crear aplicaciones web front-end
+- Node.js: motor JavaScript utilizado para aplicaciones de red y del lado del servidor escalables.
+
 Instalar express -> `npm i express`
+
+# ✨ boom
+Boom es un manejador de errores que se presenta de una manera mucho más comprensible. Lo que nos permite es manejar errores de forma amigable. Por ejemplo, si quisiéramos manejar un error Forbidden, simplemente los debemos hacer es: 
+`Boom.forbidden([message], [data])`. Recordemos que el error de un forbidden es un `403`.
+
+Fíjense que recordar todos los errores http es demasiado complicado. Hay errores `400`, errores `500`, entre otros.
+
+Lo que hace Boom es facilitarnos su uso al darle el nombre directamente. Le podemos pasar un mensaje y nos devuelve una estructura bastante amigable con el status code, el error y el mensaje
+
+Instalación -> `npm install @hapi/boom `
 
 # ✨ ¿Qué es una RESTful API?
 

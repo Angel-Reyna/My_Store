@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { conflict, notFound } from '@hapi/boom';
 
 class ProductsService {
 
@@ -14,7 +15,8 @@ class ProductsService {
         id: faker.string.uuid(),
         name: faker.commerce.productName(),
         price: parseInt(faker.commerce.price(), 10),
-        image: faker.image.url()
+        image: faker.image.url(),
+        isBlock: faker.datatype.boolean()
       });
     }
   }
@@ -43,17 +45,20 @@ class ProductsService {
 
   async findOne(id){
     const item = this.products.find(item => item.id === id);
-    if (item === undefined){
-      throw new Error('Product not found');
+    if (!item){
+      throw notFound('Product not found');
     }
-    return item
+    if (item.isBlock) {
+      throw conflict('Product is blocked');
+    }
+    return item;
   }
 
   async update(id,changes){
     const index = this.products.findIndex(item => item.id === id);
     console.log("Before update: ", this.products[index]);
     if (index === -1){
-      throw new Error('Product not found');
+      throw notFound('Product not found');
     }
     const product = this.products[index];
     this.products[index] = {
@@ -68,7 +73,7 @@ class ProductsService {
     const index = this.products.findIndex(item => item.id === id);
     console.log("Before update: ", this.products[index]);
     if (index === -1){
-      throw new Error('Product not found');
+      throw notFound('Product not found');
     }
     this.products.splice(index, 1);
     return { id };
