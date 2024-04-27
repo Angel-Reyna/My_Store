@@ -79,6 +79,20 @@ Lo que hace Boom es facilitarnos su uso al darle el nombre directamente. Le pode
 
 Instalación -> `npm install @hapi/boom `
 
+# ✨ Validación de datos con Joi
+
+Joi es la herramienta más poderosa para la validación de datos en JavaScript. Este módulo permite crear esquemas de datos usando un lenguaje simple, comprensible e intuitivo.
+
+A la hora de interactuar con una API, es muy importante que se validen los datos tanto en el lado del servidor como en el del cliente para tener controlados posibles errores y la forma en la que se interactúa con la base de datos.
+
+Anteriormente Joi pertenecía al ecosistema de Hapi, un framework para crear aplicaciones en Node, pero a partir de la versión 12.1.0 decidió dejar de formar parte de este framework y ser un paquete totalmente independiente, lo cual facilita aún más la integración con este.
+
+Integrar Joi en nuestro proyecto
+
+Lo instalaremos como dependencia en el proyecto:
+
+`$ npm install joi` 
+
 # ✨ ¿Qué es una RESTful API?
 
 **REST (Representational State Transfer)**

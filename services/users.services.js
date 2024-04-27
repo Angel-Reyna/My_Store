@@ -27,6 +27,9 @@ class UserService {
   }
 
   create(data) {
+    const elementosValidos = [ 'name', 'lastName', 'email' ];
+    //Elimina cualquier dato extra
+    Object.keys(data).forEach((key) => elementosValidos .includes(key) || delete data[key]);
     const newUser = {
       id: faker.string.uuid(),
       ...data

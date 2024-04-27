@@ -1,5 +1,8 @@
 import express from 'express';
 import UsersService from '../services/users.services.js'
+import validatorHandler from '../middlewares/validator.handler.js';
+import { createUserSchema, updateUserSchema, getUserSchema } from '../schemas/user.schema.js';
+
 
 const router = express.Router();
 const services = new UsersService();
@@ -11,25 +14,27 @@ router.get('/', ( req, res ) => {
 });
 
 //Find User
-router.get('/:id', ( req, res ) => {
-  const { id } = req.params;
-  const user = services.findOne(id);
-  if (user === undefined){
-    res.status(404).json('404 Not Found');
-  }else {
-    res.status(302).json(user);
+router.get('/:id',
+  validatorHandler(getUserSchema, 'params'),
+  ( req, res ) => {
+    const { id } = req.params;
+    const user = services.findOne(id);
+      res.status(302).json(user);
   }
-});
+);
 
 //Create User
-router.post('/', ( req, res ) => {
-  const body = req.body;
-  const newUser = services.create(body);
-  res.status(201).json({
-    message: 'User Created',
-    newUser
-  });
-});
+router.post('/',
+  validatorHandler(createUserSchema, 'body'),
+  ( req, res ) => {
+    const body = req.body;
+    const newUser = services.create(body);
+    res.status(201).json({
+      message: 'User Created',
+      newUser
+    });
+  }
+);
 
 //Delete User
 router.delete('/:id', ( req, res ) => {

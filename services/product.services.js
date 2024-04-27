@@ -22,11 +22,9 @@ class ProductsService {
   }
 
   async create(data){
-    console.log('Before: ',data);
     const elementosValidos = [ 'name', 'price', 'image' ];
     //Elimina cualquier dato extra
     Object.keys(data).forEach((key) => elementosValidos .includes(key) || delete data[key]);
-    console.log('After: ', data);
     const newProduct = {
       id: faker.string.uuid(),
       ...data
