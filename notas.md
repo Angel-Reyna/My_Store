@@ -1,3 +1,12 @@
+# ✨ consideraciones para producción:
+
+- Cors: Que acceso y a quienes le damos acceso para hacer solicitudes
+- Https: Que la API esta sobre servidor de HTTPS
+- Procesos de Build: Se ve en procesos que cosas que tiene procesar información (typescript)
+- Remover logs: No es bueno tener logs, a veces esto tiene demoras, existen mejor formas para capturar logs.
+- Seguridad (helmet): Muy importante la seguridad y para esto se recomienda helmet que es una colección de Middleware que colocan capas de seguridad a la aplicación
+- Testing: Correr pruebas unitarias o de integración antes de salir de producción
+
 # ✨ Configuración del entorno de desarrollo
 
 ### 🧩 Git Ignore: ⠀⠀⠀⠀ 
@@ -121,3 +130,10 @@ Si queremos obtener la lista de productos usaremos el método `GET` con la ruta 
 `DELETE`, no deberíamos eliminar en masa, es muy peligroso, ideal es eliminar uno a uno.
 
 >[!NOTE] Los endpoints son las URLs de un API o un backend que responden a una petición. Los mismos entrypoints tienen que calzar con un endpoint para existir. Algo debe responder para que se renderice un sitio con sentido para el visitante.
+
+
+# ✨ ¿Qué es Heroku?
+
+Heroku es una plataforma de servicios en la nube (conocidos como PaaS o Platform as a Service) que permite manejar los servidores y sus configuraciones, escalamiento y la administración. Su popularidad ha crecido en los últimos años debido a su facilidad de uso y versatilidad para distintos proyectos.
+
+Heroku es uno de los PaaS más utilizados en la actualidad en entornos empresariales por su fuerte enfoque en resolver el despliegue de una aplicación. En otras palabras, a Heroku solo le dices qué lenguaje de backend estás utilizando o qué base de datos vas a utilizar y te preocupas únicamente por el desarrollo de tu aplicación.
