@@ -5,7 +5,7 @@ import  cors from "cors";
 //npm run dev
 
 const app = express();
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 

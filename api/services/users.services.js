@@ -1,4 +1,5 @@
 import {faker} from '@faker-js/faker';
+import { getConnection } from "../lib/postgres.js";
 
 class UserService {
   constructor(){
@@ -18,8 +19,10 @@ class UserService {
     };
   }
 
-  find() {
-    return this.users;
+  async find() {
+    const client = await getConnection();
+    const res = await client.query('SELECT * FROM tasks');
+    return res.rows;
   }
 
   findOne(id){

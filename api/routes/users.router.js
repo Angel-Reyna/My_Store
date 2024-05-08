@@ -8,12 +8,16 @@ const router = express.Router();
 const services = new UsersService();
 
 //Find Users
-router.get('/', ( req, res ) => {
-    const users = services.find();
-    res.status(200).send(users);
+router.get('/', async ( req, res, next ) => {
+  try {
+    const users = await services.find();
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
 });
 
-//Find User
+//Find Individual User
 router.get('/:id',
   validatorHandler(getUserSchema, 'params'),
   ( req, res ) => {
