@@ -19,31 +19,56 @@ router.get('/', async ( req, res, next ) => {
 
 //Find Individual User
 router.get('/:id',
-  validatorHandler(getUserSchema, 'params'),
-  ( req, res ) => {
-    const { id } = req.params;
-    const user = services.findOne(id);
+  validatorHandler(getUserSchema, Number('params')),
+  async ( req, res, next ) => {
+    try {
+      const { id } = req.params;
+      const user = await services.findOne(id);
       res.status(302).json(user);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
 //Create User
 router.post('/',
   validatorHandler(createUserSchema, 'body'),
-  ( req, res ) => {
-    const body = req.body;
-    const newUser = services.create(body);
-    res.status(201).json({
-      message: 'User Created',
-      newUser
-    });
+  async ( req, res, next ) => {
+    try {
+      const body = req.body;
+      const newUser = await services.create(body);
+      res.status(201).json(newUser);
+    } catch (error) {
+      next(error); // Pass errors to Express.
+    }
+  }
+);
+
+//Update User
+router.patch('/:id',
+  validatorHandler(getUserSchema, Number('params')),
+  validatorHandler(updateUserSchema, 'body'),
+  async ( req,res,next ) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const userUpdate = await services.update( id, body );
+        res.json({
+          message: 'User Updated',
+          data: userUpdate
+        });
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
 //Delete User
-router.delete('/:id', ( req, res ) => {
+router.delete('/:id',
+  async ( req, res ) => {
     const { id } = req.params;
-    const response = services.delete(id);
+    const response = await services.delete(id);
     res.json({
       message: 'User Deleted',
       response

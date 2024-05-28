@@ -1,6 +1,6 @@
 import express from 'express';
 import routerApi from './routes/index.js';
-import { errorsLog,errorHandler,boomErrorHandler } from './middlewares/error.handler.js'
+import { errorsLog,errorHandler,boomErrorHandler,ormErrorHandler } from './middlewares/error.handler.js'
 import  cors from "cors";
 //npm run dev
 
@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 //localhost:3005/api/v1/products
-const whitelist = ['http://localhost:3005', 'https://myapp.com'];
+const whitelist = ['http://localhost:3000', 'https://myapp.com'];
 const options = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin) || !origin) {
@@ -40,6 +40,8 @@ routerApi(app);
 
 app.use(cors(options));
 
-app.use(errorsLog);
+//Middleware - error handlers
+app.use(errorsLog);           // se ejecutan en orden
+app.use(ormErrorHandler);
 app.use(boomErrorHandler);
-app.use(errorHandler);
+app.use(errorHandler);        // si ninguno de los anteriores captura el error el errorHandler lo toma

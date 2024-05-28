@@ -1,0 +1,15 @@
+module.exports = {
+  'config': './api/db/config.js',
+  'models-path': './api/db/models/',
+  'migrations-path': './api/db/migrations/',
+  'seeders-path': './api/db/seeders/'
+}
+
+// const path = require('path');
+
+// module.exports = {
+//   'config': path.resolve('config', './api/db/config.js'),
+//   'models-path': path.resolve('db', './api/db/models'),
+//   'seeders-path': path.resolve('db', './api/db/seeders'),
+//   'migrations-path': path.resolve('db', './api/db/migrations')
+// };

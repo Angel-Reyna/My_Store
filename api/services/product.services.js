@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { conflict, notFound } from '@hapi/boom';
+import { sequelize } from "../lib/sequelize.js";
 
 class ProductsService {
 
@@ -33,12 +34,10 @@ class ProductsService {
     return newProduct;
   }
 
-  find(){
-    return new Promise (( resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.products);
-      },1500);
-    });
+  async find(){
+    const query ='SELECT * FROM tasks';
+    const [data] = await sequelize.query(query); //retorna data y metadata
+    return data;
   }
 
   async findOne(id){
