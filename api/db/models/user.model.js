@@ -1,6 +1,6 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize')
 
-const USER_TABLE = 'users'; // nombre de la tabla
+const USER_TABLE = 'users' // nombre de la tabla
 
 const UserSchema = {
   // El esquema define la estructura de la BD.
@@ -8,16 +8,21 @@ const UserSchema = {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER
   },
   email: {
     allowNull: false,
     type: DataTypes.STRING,
-    unique: true,
+    unique: true
   },
   password: {
     allowNull: false,
+    type: DataTypes.STRING
+  },
+  role: {
+    allowNull: false,
     type: DataTypes.STRING,
+    defaultValue: 'costumer'
   },
   createdAt: {
     //* nombre en JS
@@ -25,22 +30,25 @@ const UserSchema = {
     type: DataTypes.DATE,
     field: 'created_at', //* nombre en PostgreSQL
     defaultValue: Sequelize.NOW
-  },
-};
+  }
+}
 
 class User extends Model {
-  static associate() {
-    // models
+  static associate (models) {
+    this.hasOne(models.Costumer, {
+      as: 'costumer',
+      foreignKey: 'userId'
+    })
   }
 
-  static config(sequelize) {
+  static config (sequelize) {
     return {
       sequelize,
       tableName: USER_TABLE,
       modelName: 'User',
-      timestamps: false,
-    };
+      timestamps: false
+    }
   }
 }
 
-module.exports = { USER_TABLE, UserSchema, User };
+module.exports = { USER_TABLE, UserSchema, User }

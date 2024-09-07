@@ -33,7 +33,9 @@ app.get('/api/nueva-ruta', ( req, res ) => {
 });
 
 app.listen(port, () => {
+  console.log('+ + + + + + + + + + + + + + + + + + + + + +');
   console.log(`Mi port: http://localhost:${port}/api`);
+  console.log('+ + + + + + + + + + + + + + + + + + + + + +');
 });
 
 routerApi(app);

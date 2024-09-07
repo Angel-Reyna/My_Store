@@ -14,7 +14,7 @@ console.log('- - - - - - - - - - - - - - - - - - - - - -');
 const sequelize = new Sequelize(URI, {
   dialect: 'postgres',
   // dialect: 'mysql',
-  logging: true
+  logging: false //evita que se muestren los console.log() de los comandos de SQL |SELECT*FROM...etc|
 });
 
 setupModels(sequelize);
