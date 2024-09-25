@@ -1,61 +1,61 @@
 import express from 'express'
-import CostumersService from '../services/costumers.services.js'
+import CustomersService from '../services/customers.services.js'
 import validatorHandler from '../middlewares/validator.handler.js'
-import { createCostumerSchema, updateCostumerSchema, getCostumerSchema } from '../schemas/costumer.schema.js'
+import { createCustomerSchema, updateCustomerSchema, getCustomerSchema } from '../schemas/customer.schema.js'
 
 const router = express.Router()
-const services = new CostumersService()
+const services = new CustomersService()
 
-//  Find Costumer
+//  Find Customer
 router.get('/', async (req, res, next) => {
   try {
-    const costumers = await services.find()
-    res.json(costumers)
+    const customers = await services.find()
+    res.json(customers)
   } catch (error) {
     next(error)
   }
 })
 
-//  Find Individual Costumer
+//  Find Individual Customer
 router.get('/:id',
-  validatorHandler(getCostumerSchema, Number('params')),
+  validatorHandler(getCustomerSchema, Number('params')),
   async (req, res, next) => {
     try {
       const { id } = req.params
-      const costumer = await services.findOne(id)
-      res.status(302).json(costumer)
+      const customer = await services.findOne(id)
+      res.status(302).json(customer)
     } catch (error) {
       next(error)
     }
   }
 )
 
-//  Create Costumer
+//  Create Customer
 router.post('/',
-  validatorHandler(createCostumerSchema, 'body'),
+  validatorHandler(createCustomerSchema, 'body'),
   async (req, res, next) => {
     try {
       const body = req.body
-      const newCostumer = await services.create(body)
-      res.status(201).json(newCostumer)
+      const newCustomer = await services.create(body)
+      res.status(201).json(newCustomer)
     } catch (error) {
       next(error) // Pass errors to Express.
     }
   }
 )
 
-//  Update Costumer
+//  Update Customer
 router.patch('/:id',
-  validatorHandler(getCostumerSchema, Number('params')),
-  validatorHandler(updateCostumerSchema, 'body'),
+  validatorHandler(getCustomerSchema, Number('params')),
+  validatorHandler(updateCustomerSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params
       const body = req.body
-      const costumerUpdate = await services.update(id, body)
+      const customerUpdate = await services.update(id, body)
       res.json({
-        message: 'Costumers Updated',
-        data: costumerUpdate
+        message: 'Customers Updated',
+        data: customerUpdate
       })
     } catch (error) {
       next(error)
@@ -63,13 +63,13 @@ router.patch('/:id',
   }
 )
 
-//  Delete Costumer
+//  Delete Customer
 router.delete('/:id',
   async (req, res) => {
     const { id } = req.params
     const response = await services.delete(id)
     res.json({
-      message: 'Costumer Deleted',
+      message: 'Customer Deleted',
       response
     })
   })

@@ -25,7 +25,7 @@ class UserService {
 
   async find () {
     const res = await User.findAll({
-      include: ['costumer']
+      include: ['customer']
     })
     return res
 

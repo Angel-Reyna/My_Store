@@ -1,12 +1,11 @@
 import { faker } from '@faker-js/faker'
 // import { pool } from "../lib/postgres.pool.js";
-import { Costumer } from '../db/models/costumer.model.js'
-import { User } from '../db/models/user.model.js'
+import { Customer } from '../db/models/customer.model.js'
 import { notFound } from '@hapi/boom'
 
-class CostumersService {
+class CustomersService {
   constructor () {
-    this.costumers = []
+    this.customers = []
     this.generate()
     // this.pool = pool;
     // this.pool.on('error', (err) => console.error(err));
@@ -15,7 +14,7 @@ class CostumersService {
   generate () {
     const limit = 5
     for (let index = 0; index < limit; index++) {
-      this.costumers.push({
+      this.customers.push({
         id: faker.string.uuid(),
         name: faker.person.firstName(),
         lastName: faker.person.lastName(),
@@ -25,7 +24,7 @@ class CostumersService {
   }
 
   async find () {
-    const res = await Costumer.findAll({
+    const res = await Customer.findAll({
       include: ['user']
     })
     return res
@@ -36,31 +35,31 @@ class CostumersService {
   }
 
   async findOne (id) {
-    const costumer = await Costumer.findByPk(id)
-    if (!costumer) {
-      throw notFound('Costumer not found')
+    const customer = await Customer.findByPk(id)
+    if (!customer) {
+      throw notFound('Customer not found')
     }
-    return costumer
+    return customer
   }
 
   async create (data) {
-    const newCostumer = await Costumer.create(data, {
+    const newCustomer = await Customer.create(data, {
       include: ['user']
     })
-    return newCostumer
+    return newCustomer
   }
 
   async update (id, changes) {
-    const costumer = await this.findOne(id)
-    const res = await costumer.update(changes)
+    const customer = await this.findOne(id)
+    const res = await customer.update(changes)
     return res
   }
 
   async delete (id) {
-    const costumer = await this.findOne(id)
-    await costumer.destroy()
+    const customer = await this.findOne(id)
+    await customer.destroy()
     return { id }
   }
 }
 
-export default CostumersService
+export default CustomersService

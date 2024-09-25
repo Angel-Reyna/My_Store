@@ -1,9 +1,9 @@
 const { Model, DataTypes, Sequelize } = require('sequelize')
-const { USER_TABLE } = require('./user.model.js')
+const { CATEGORY_TABLE } = require('./category.model')
 
-const CUSTOMER_TABLE = 'customers' // nombre de la tabla
+const PRODUCT_TABLE = 'products' // nombre de la tabla
 
-const CustomerSchema = {
+const ProductSchema = {
   // El esquema define la estructura de la BD.
   id: {
     allowNull: false,
@@ -15,29 +15,30 @@ const CustomerSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
-  lastName: {
-    allowNull: false,
-    type: DataTypes.STRING,
-    field: 'last_name' // nombre en db
-  },
-  phone: {
+  image: {
     allowNull: false,
     type: DataTypes.STRING
   },
+  description: {
+    allowNull: false,
+    type: DataTypes.TEXT
+  },
+  price: {
+    allowNull: false,
+    type: DataTypes.INTEGER
+  },
   createdAt: {
-    //* nombre en JS
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'created_at', //* nombre en PostgreSQL
+    field: 'created_at',
     defaultValue: Sequelize.NOW
   },
-  userId: {
-    field: 'user_id',
+  categoryId: {
+    field: 'category_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
-      model: USER_TABLE,
+      model: CATEGORY_TABLE,
       key: 'id'
     },
     onUpdate: 'CASCADE',
@@ -45,23 +46,19 @@ const CustomerSchema = {
   }
 }
 
-class Customer extends Model {
+class Product extends Model {
   static associate (models) {
-    this.belongsTo(models.User, { as: 'user' })
-    this.hasMany(models.Order, {
-      as: 'orders',
-      foreignKey: 'customerId'
-    })
+    this.belongsTo(models.Category, { as: 'category' })
   }
 
   static config (sequelize) {
     return {
       sequelize,
-      tableName: CUSTOMER_TABLE,
-      modelName: 'Customer',
+      tableName: PRODUCT_TABLE,
+      modelName: 'Product',
       timestamps: false
     }
   }
 }
 
-module.exports = { CUSTOMER_TABLE, CustomerSchema, Customer }
+module.exports = { Product, PRODUCT_TABLE, ProductSchema }

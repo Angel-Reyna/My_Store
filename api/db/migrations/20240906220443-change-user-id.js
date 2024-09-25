@@ -3,11 +3,11 @@ const { DataTypes } = require('sequelize')
 
 /** @type {import('sequelize-cli').Migration} */
 
-const { COSTUMER_TABLE } = require('../models/costumer.model.js')
+const { CUSTOMER_TABLE } = require('../models/customer.model.js')
 
 module.exports = {
   up: async (queryInterface) => {
-    await queryInterface.changeColumn(COSTUMER_TABLE, 'user-id', {
+    await queryInterface.changeColumn(CUSTOMER_TABLE, 'user-id', {
       field: 'user_id',
       allowNull: false,
       type: DataTypes.INTEGER,
@@ -15,6 +15,6 @@ module.exports = {
     })
   },
   down: async (queryInterface) => {
-    // await queryInterface.dropTable(COSTUMER_TABLE)
+    // await queryInterface.dropTable(CUSTOMER_TABLE)
   }
 }

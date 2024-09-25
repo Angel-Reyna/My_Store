@@ -2,13 +2,13 @@
 
 /** @type {import('sequelize-cli').Migration} */
 
-const { CostumerSchema, COSTUMER_TABLE } = require('../models/costumer.model.js')
+const { CustomerSchema, CUSTOMER_TABLE } = require('../models/customer.model.js')
 
 module.exports = {
   up: async (queryInterface) => {
-    await queryInterface.createTable(COSTUMER_TABLE, CostumerSchema)
+    await queryInterface.createTable(CUSTOMER_TABLE, CustomerSchema)
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable(COSTUMER_TABLE)
+    await queryInterface.dropTable(CUSTOMER_TABLE)
   }
 }
