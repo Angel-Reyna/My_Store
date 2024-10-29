@@ -21,8 +21,14 @@ const phone = Joi.string().min(6).max(10).messages({
   'string.min': '"teléfono" debe tener una longitud mínima de {#limit}',
   'string.max': '"teléfono" debe tener una longitud máxima de {#limit}'
 })
-const userId = Joi.number().integer()
-const email = Joi.string().email()
+const userId = Joi.number().integer().messages({
+  'string.base': '"userId" debe ser un tipo de "texto"',
+  'string.empty': '"userId" no puede ser un campo vacío'
+})
+const email = Joi.string().email().messages({
+  'string.base': '"email" debe ser un tipo de "texto"',
+  'string.empty': '"email" no puede ser un campo vacío'
+})
 const password = Joi.string()
 
 const createCustomerSchema = Joi.object({

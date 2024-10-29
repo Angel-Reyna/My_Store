@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 // import { pool } from "../lib/postgres.pool.js";
-import { User } from "../db/models/user.model.js"
+import { User } from '../db/models/user.model.js'
 import { notFound } from '@hapi/boom'
 
 class UserService {
@@ -11,7 +11,7 @@ class UserService {
     // this.pool.on('error', (err) => console.error(err));
   }
 
-  generate () {
+  async generate () {
     const limit = 5
     for (let index = 0; index < limit; index++) {
       this.users.push({

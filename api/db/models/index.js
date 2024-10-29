@@ -1,5 +1,5 @@
 const { User, UserSchema } = require('./user.model.js')
-const { Customer, CustomerSchema } = require('./Customer.model.js')
+const { Customer, CustomerSchema } = require('./customer.model.js')
 const { Category, CategorySchema } = require('./category.model.js')
 const { Product, ProductSchema } = require('./product.model.js')
 const { Order, OrderSchema } = require('./order.model.js')

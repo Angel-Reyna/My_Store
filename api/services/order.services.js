@@ -1,13 +1,13 @@
-const { models } = require('./../libs/sequelize')
+import { Order } from '../db/models/order.model.js'
 
 class OrderService {
   async create (data) {
-    const newOrder = await models.Order.create(data)
+    const newOrder = await Order.create(data)
     return newOrder
   }
 
   async addItem (data) {
-    const newItem = await models.OrderProduct.create(data)
+    const newItem = await Order.create(data)
     return newItem
   }
 
@@ -16,7 +16,7 @@ class OrderService {
   }
 
   async findOne (id) {
-    const order = await models.Order.findByPk(id, {
+    const order = await Order.findByPk(id, {
       include: [
         {
           association: 'customer',
@@ -40,4 +40,4 @@ class OrderService {
   }
 }
 
-module.exports = OrderService
+export default OrderService
