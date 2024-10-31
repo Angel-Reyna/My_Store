@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize')
 
-const USER_TABLE = 'users' // nombre de la tabla
+const PRODUCT_TABLE = 'products' // nombre de la tabla
 
-const UserSchema = {
+const ProductSchema = {
   // El esquema define la estructura de la BD.
   id: {
     allowNull: false,
@@ -10,12 +10,15 @@ const UserSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  email: {
+  name: {
     allowNull: false,
-    type: DataTypes.STRING,
-    unique: true
+    type: DataTypes.STRING
   },
-  password: {
+  price: {
+    allowNull: false,
+    type: DataTypes.INTEGER
+  },
+  image: {
     allowNull: false,
     type: DataTypes.STRING
   },
@@ -28,7 +31,7 @@ const UserSchema = {
   }
 }
 
-class User extends Model {
+class Product extends Model {
   static associate () {
     // models
   }
@@ -36,11 +39,11 @@ class User extends Model {
   static config (sequelize) {
     return {
       sequelize,
-      tableName: USER_TABLE,
-      modelName: 'User',
+      tableName: PRODUCT_TABLE,
+      modelName: 'Product',
       timestamps: false
     }
   }
 }
 
-module.exports = { USER_TABLE, UserSchema, User }
+module.exports = { PRODUCT_TABLE, ProductSchema, Product }

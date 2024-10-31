@@ -1,4 +1,4 @@
-import { ValidationError } from "sequelize";
+import { ValidationError } from 'sequelize'
 
 function errorsLog (err, req, res, next) {
   next(err)
@@ -12,24 +12,24 @@ function errorHandler (err, req, res, next) {
   //     message: 'email must be unique'
   //   });
   // } else {
-    res.status(500).json({
-      message: err.message,
-      stack: err.stack
-    });
+  res.status(500).json({
+    message: err.message,
+    stack: err.stack
+  })
   // }
-  next(err);
+  next(err)
 }
 
-function ormErrorHandler(err, req, res, next) {
-  if(err instanceof ValidationError) {
-      res.status(409).json({
-        statusCode: 409,
-        message: err.errors[0].message,
-        detail: err.parent.detail,
-        errors: err.errors
-      });
+function ormErrorHandler (err, req, res, next) {
+  if (err instanceof ValidationError) {
+    res.status(409).json({
+      statusCode: 409,
+      message: err.errors[0].message,
+      detail: err.parent.detail,
+      errors: err.errors
+    })
   }
-  next(err);
+  next(err)
 }
 
 function boomErrorHandler (err, req, res, next) {

@@ -1,13 +1,13 @@
-import express from 'express';
+import express from 'express'
 
-const router = express.Router();
+const router = express.Router()
 
-router.get('/:categoryId/products/:productId', ( req, res ) => {
-  const { categoryId,productId } = req.params;
+router.get('/:categoryId/products/:productId', (req, res) => {
+  const { categoryId, productId } = req.params
   res.json({
     categoryId,
     productId
-  });
-});
+  })
+})
 
-export default router;
+export default router
